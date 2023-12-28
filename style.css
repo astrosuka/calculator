@@ -27,6 +27,7 @@ body {
     padding: 10px;
     text-align: right;
     border-radius: 10px 10px 0px 0px;
+    height: calc(var(--cont-width)/10);
 }
 
 #button-section {
