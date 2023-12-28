@@ -1,43 +1,57 @@
+let num1 = '';
+let operator
+let num2 ='';
+let result = '';
+let displayValue = '';
+
+const display = document.querySelector('#display');
+const numberButton = document.querySelectorAll('.num-but');
+const operatorButton = document.querySelectorAll('.op-but');
+const resultButton = document.querySelector('.result-but');
+const clearBut = document.querySelector('.clear-but');
+
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-let num1 = '';
-let operator
-let num2 ='';
-
-const display = document.querySelector('#display');
-const numBut = document.querySelectorAll('.num-but');
-let displayValue = '';
-
-for (let i = 0; i < numBut.length; i++) {
-    numBut[i].addEventListener('click', () => {
-        displayValue += numBut[i].value;
+for (let i = 0; i < numberButton.length; i++) {
+    numberButton[i].addEventListener('click', () => {
+        result = '';
+        displayValue += numberButton[i].value;
         display.textContent = displayValue;
         if(num1 !== '') {
             num2 = displayValue;
         }
     });
-    
 }
-let result;
-const opBut = document.querySelectorAll('.op-but');
 
-for (let i = 0; i < opBut.length; i++) {
-    opBut[i].addEventListener('click', () => {
+const decimalButton = document.querySelector('.decimal-but');
+decimalButton.addEventListener('click', () => {
+    if (!displayValue.includes('.')){
+        displayValue += decimalButton.value;
+        display.textContent = displayValue;
+    }
+});
+
+for (let i = 0; i < operatorButton.length; i++) {
+    operatorButton[i].addEventListener('click', () => {
+        if (result !== ''){
+            num1 = result;
+        }
+
         if (num1 === '' && num2 === '') {
             num1 = displayValue;
-            operator = opBut[i].value;
+            operator = operatorButton[i].value;
             displayValue = '';
 
         } else if (num1 !== '' && num2 === '') {
             num2 = displayValue;
-            operator = opBut[i].value;
+            operator = operatorButton[i].value;
             displayValue = '';
 
         } else if (num1 !== '' && num2 !== '') {
-            operator = opBut[i].value;
+            operator = operatorButton[i].value;
             result = operate(num1, num2, operator);
             num1 = result;
             num2 = displayValue;
@@ -48,8 +62,7 @@ for (let i = 0; i < opBut.length; i++) {
     });
 }
 
-const resultBut = document.querySelector('.result-but');
-resultBut.addEventListener('click', () => {
+resultButton.addEventListener('click', () => {
     if (operator === '/' && num2 === '0'){
         display.textContent = 'Que hiciste?';
     } else if (num1 !== '' && num2 !== '') {
@@ -62,11 +75,11 @@ resultBut.addEventListener('click', () => {
     // do nothing!
 })
 
-const clearBut = document.querySelector('.clear-but');
 clearBut.addEventListener('click', () => {
     num1 = '';
     num2 = '';
     displayValue = '';
+    result = '';
     display.textContent = displayValue;
 });
 
