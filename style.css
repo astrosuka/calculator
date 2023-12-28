@@ -48,7 +48,29 @@ body {
     justify-content: space-between;
 }
 
+
+#top-but-section button {
+    border: solid black 1px;
+    border-radius: 2px;
+    /* border-top: none; */
+    /* background-color: aqua; */
+}
 #button-section button {
     width: calc(var(--cont-width)/4);
     height: calc(var(--cont-width)/4.5);
+    border: solid black 1px;
+    border-radius: 2px;
+    border-top: none;
+}
+
+.op-but, .result-but {
+    background-color: floralwhite;
+}
+
+button:hover {
+    background-color:azure;
+}
+
+button:active {
+    background-color: antiquewhite;
 }
