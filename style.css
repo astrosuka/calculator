@@ -1,5 +1,5 @@
 :root {
-    --cont-width: 150px;
+    --cont-width: 124px;
 }
   
 * {
@@ -23,11 +23,23 @@ body {
 }
 
 #display {
-    background-color: whitesmoke;
-    padding: 10px;
+    /* background-color: whitesmoke; */
+    background-color: rgba(172, 255, 47, 0.518);
+    padding: 15px 10px;
     text-align: right;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+    border: solid black 1px;
+    border-bottom: none;
     height: calc(var(--cont-width)/10);
+}
+
+#top-but-section {
+    display: flex;
+}
+
+#top-but-section button {
+    width: calc(var(--cont-width)/4);
+    height: calc(var(--cont-width)/6);
 }
 
 #button-section {
