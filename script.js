@@ -8,26 +8,34 @@ const display = document.querySelector('#display');
 const numberButton = document.querySelectorAll('.num-but');
 const operatorButton = document.querySelectorAll('.op-but');
 const resultButton = document.querySelector('.result-but');
-const clearBut = document.querySelector('.clear-but');
+const clearButton = document.querySelector('.clear-but');
+const decimalButton = document.querySelector('.decimal-but');
+const backspaceButton = document.querySelector('.backspace-but');
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
+// TERMINAR ESTO
+// document.addEventListener('keydown', (e) => {
+//     // e.key === 229;
+//     console.log(e.key);
+// })
 
 for (let i = 0; i < numberButton.length; i++) {
     numberButton[i].addEventListener('click', () => {
-        result = '';
-        displayValue += numberButton[i].value;
-        display.textContent = displayValue;
-        if(num1 !== '') {
-            num2 = displayValue;
+        if (displayValue.length <= 10) {
+            result = '';
+            displayValue += numberButton[i].value;
+            display.textContent = displayValue;
+            if(num1 !== '') {
+                num2 = displayValue;
+            }
         }
     });
 }
 
-const decimalButton = document.querySelector('.decimal-but');
 decimalButton.addEventListener('click', () => {
     if (!displayValue.includes('.')){
         displayValue += decimalButton.value;
@@ -35,7 +43,6 @@ decimalButton.addEventListener('click', () => {
     }
 });
 
-const backspaceButton = document.querySelector('.backspace-but');
 backspaceButton.addEventListener('click', () => {
     displayValue = displayValue.slice(0, -1);
     display.textContent = displayValue;
@@ -63,8 +70,8 @@ for (let i = 0; i < operatorButton.length; i++) {
             num1 = result;
             num2 = displayValue;
             displayValue = '';
-
         }
+
         display.textContent = '';
     });
 }
@@ -83,14 +90,13 @@ resultButton.addEventListener('click', () => {
     // do nothing!
 })
 
-clearBut.addEventListener('click', () => {
+clearButton.addEventListener('click', () => {
     num1 = '';
     num2 = '';
     displayValue = '';
     result = '';
     display.textContent = displayValue;
     document.body.style.backgroundColor = "";
-
 });
 
 function operate (num1, num2, operator) {
