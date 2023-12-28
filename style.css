@@ -1,0 +1,39 @@
+:root {
+    --cont-width: 150px;
+}
+  
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+
+}
+#calculator {
+    display: flex;
+    flex-direction: column;
+    width: var(--cont-width);
+    border: solid lightblue 1px;
+    padding: 3px;
+}
+
+#screen {
+    background-color: whitesmoke;
+    padding: 5px;
+    text-align: right;
+}
+
+#button-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#button-section button {
+    width: calc(var(--cont-width)/4);
+    height: calc(var(--cont-width)/5);
+    
+}
