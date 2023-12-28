@@ -23,3 +23,16 @@ function operate (num1, num2, operator) {
             alert('...');
     }
 }
+
+const display = document.querySelector('#display');
+const numBut = document.querySelectorAll('.num-but');
+let displayValue = '';
+
+for (let i = 0; i < numBut.length; i++) {
+    numBut[i].addEventListener('click', () => {
+        // console.log(numBut[i].value);
+        displayValue += numBut[i].value;
+        display.textContent = displayValue;
+    });
+    
+}
