@@ -25,79 +25,91 @@ const divide = (a, b) => a / b;
 
 for (let i = 0; i < numberButton.length; i++) {
     numberButton[i].addEventListener('click', () => {
-        if (displayValue.length <= 10) {
-            result = '';
-            displayValue += numberButton[i].value;
-            display.textContent = displayValue;
-            if(num1 !== '') {
-                num2 = displayValue;
-            }
-        }
+        setNumber(numberButton[i]);
     });
 }
+for (let i = 0; i < operatorButton.length; i++) {
+    operatorButton[i].addEventListener('click', () => {
+        setOperator(operatorButton[i]);
+    });
+}
+decimalButton.addEventListener('click', setDecimal);
+backspaceButton.addEventListener('click', backspace);
+resultButton.addEventListener('click', getResult)
+clearButton.addEventListener('click', clear);
 
-decimalButton.addEventListener('click', () => {
+function setNumber (num) {
+    if (displayValue.length <= 10) {
+        result = '';
+        displayValue += num.value;
+        display.textContent = displayValue;
+        if(num1 !== '') {
+            num2 = displayValue;
+        }
+    }
+}
+
+function setDecimal () {
     if (!displayValue.includes('.')){
         displayValue += decimalButton.value;
         display.textContent = displayValue;
     }
-});
-
-backspaceButton.addEventListener('click', () => {
-    displayValue = displayValue.slice(0, -1);
-    display.textContent = displayValue;
-});
-
-for (let i = 0; i < operatorButton.length; i++) {
-    operatorButton[i].addEventListener('click', () => {
-        if (result !== ''){
-            num1 = result;
-        }
-
-        if (num1 === '' && num2 === '') {
-            num1 = displayValue;
-            operator = operatorButton[i].value;
-            displayValue = '';
-
-        } else if (num1 !== '' && num2 === '') {
-            num2 = displayValue;
-            operator = operatorButton[i].value;
-            displayValue = '';
-
-        } else if (num1 !== '' && num2 !== '') {
-            operator = operatorButton[i].value;
-            result = operate(num1, num2, operator);
-            num1 = result;
-            num2 = displayValue;
-            displayValue = '';
-        }
-
-        display.textContent = '';
-    });
 }
 
-resultButton.addEventListener('click', () => {
+
+function setOperator (op) {
+    if (result !== ''){
+        num1 = result;
+    }
+    
+    if (num1 === '' && num2 === '') {
+        num1 = displayValue;
+        operator = op.value;
+        displayValue = '';
+
+    } else if (num1 !== '' && num2 === '') {
+        num2 = displayValue;
+        operator = op.value;
+        displayValue = '';
+        
+    } else if (num1 !== '' && num2 !== '') {
+        operator = op.value;
+        result = operate(num1, num2, operator);
+        num1 = result;
+        num2 = displayValue;
+        displayValue = '';
+    }
+    
+    display.textContent = '';
+}
+
+function getResult () {
     if (operator === '/' && num2 === '0'){
         display.textContent = '!!!';
         document.body.style.backgroundColor = "red";
     } else if (num1 !== '' && num2 !== '') {
         result = operate(num1, num2, operator);
+        
         display.textContent = Math.round(result * 1000000) / 1000000;
         num1 = '';
         num2 = '';
         displayValue = '';
     }
-    // do nothing!
-})
+}
 
-clearButton.addEventListener('click', () => {
+function backspace () {
+    displayValue = displayValue.slice(0, -1);
+    display.textContent = displayValue;
+}
+
+function clear () {
     num1 = '';
     num2 = '';
     displayValue = '';
     result = '';
     display.textContent = displayValue;
     document.body.style.backgroundColor = "";
-});
+}
 
 function operate (num1, num2, operator) {
     switch (operator){
