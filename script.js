@@ -3,9 +3,9 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-let num1 = '';//= prompt('numero 1');
-let operator // = prompt('operador');
-let num2 // = prompt('numero 2');
+let num1 = '';
+let operator
+let num2 ='';
 
 const display = document.querySelector('#display');
 const numBut = document.querySelectorAll('.num-but');
@@ -17,38 +17,48 @@ for (let i = 0; i < numBut.length; i++) {
         display.textContent = displayValue;
         if(num1 !== '') {
             num2 = displayValue;
-            console.log(`num1: ${num1} ${operator} num2: ${num2}`)
+            // console.log(`numBut --> num1: ${num1} ${operator} num2: ${num2}`)
         }
     });
     
 }
-
+let result;
 const opBut = document.querySelectorAll('.op-but');
 
 for (let i = 0; i < opBut.length; i++) {
     opBut[i].addEventListener('click', () => {
-        if (num1 === '') {
+        if (num1 === '' && num2 === '') {
             num1 = displayValue;
-        } else if(num1 !== '') {
+            operator = opBut[i].value;
+            displayValue = '';
+
+        } else if (num1 !== '' && num2 === '') {
             num2 = displayValue;
+            operator = opBut[i].value;
+            displayValue = '';
+
+        } else if (num1 !== '' && num2 !== '') {
+            operator = opBut[i].value;
+            result = operate(num1, num2, operator);
+            num1 = result;
+            num2 = displayValue;
+            displayValue = '';
+
         }
-        displayValue = '';
         display.textContent = '';
-        operator = opBut[i].value;
-        console.log(`num1: ${num1} ${operator} num2: ${num2}`)
+        // console.log(`operatorBut --> num1: ${num1} ${operator} num2: ${num2}`)
     });
 }
 
-let result;
 const resultBut = document.querySelector('.result-but');
 resultBut.addEventListener('click', () => {
     result = operate(num1, num2, operator);
-    console.log(result);
+    // console.log(result);
     display.textContent = result;
     num1 = '';
     num2 = '';
     displayValue = '';
-    console.log(`num1: ${num1} ${operator} num2: ${num2}`)
+    // console.log(`num1: ${num1} ${operator} num2: ${num2}`)
 
 })
 
@@ -71,6 +81,6 @@ function operate (num1, num2, operator) {
         case '/':
             return divide(+num1, +num2);
         default:
-            alert('...');
+            displayValue = '';
     }
 }
