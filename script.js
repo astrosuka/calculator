@@ -17,7 +17,6 @@ for (let i = 0; i < numBut.length; i++) {
         display.textContent = displayValue;
         if(num1 !== '') {
             num2 = displayValue;
-            // console.log(`numBut --> num1: ${num1} ${operator} num2: ${num2}`)
         }
     });
     
@@ -46,19 +45,19 @@ for (let i = 0; i < opBut.length; i++) {
 
         }
         display.textContent = '';
-        // console.log(`operatorBut --> num1: ${num1} ${operator} num2: ${num2}`)
     });
 }
 
 const resultBut = document.querySelector('.result-but');
 resultBut.addEventListener('click', () => {
-    result = operate(num1, num2, operator);
-    display.textContent = Math.round(result * 1000000) / 1000000;
-    num1 = '';
-    num2 = '';
-    displayValue = '';
-    // console.log(`num1: ${num1} ${operator} num2: ${num2}`)
-
+    if (num1 !== '' && num2 !== '') {
+        result = operate(num1, num2, operator);
+        display.textContent = Math.round(result * 1000000) / 1000000;
+        num1 = '';
+        num2 = '';
+        displayValue = '';
+    }
+    // do nothing!
 })
 
 const clearBut = document.querySelector('.clear-but');
