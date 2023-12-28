@@ -50,7 +50,9 @@ for (let i = 0; i < opBut.length; i++) {
 
 const resultBut = document.querySelector('.result-but');
 resultBut.addEventListener('click', () => {
-    if (num1 !== '' && num2 !== '') {
+    if (operator === '/' && num2 === '0'){
+        display.textContent = 'Que hiciste?';
+    } else if (num1 !== '' && num2 !== '') {
         result = operate(num1, num2, operator);
         display.textContent = Math.round(result * 1000000) / 1000000;
         num1 = '';
