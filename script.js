@@ -53,8 +53,7 @@ for (let i = 0; i < opBut.length; i++) {
 const resultBut = document.querySelector('.result-but');
 resultBut.addEventListener('click', () => {
     result = operate(num1, num2, operator);
-    // console.log(result);
-    display.textContent = result;
+    display.textContent = Math.round(result * 1000000) / 1000000;
     num1 = '';
     num2 = '';
     displayValue = '';
