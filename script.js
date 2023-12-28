@@ -15,6 +15,7 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
+
 for (let i = 0; i < numberButton.length; i++) {
     numberButton[i].addEventListener('click', () => {
         result = '';
@@ -32,6 +33,12 @@ decimalButton.addEventListener('click', () => {
         displayValue += decimalButton.value;
         display.textContent = displayValue;
     }
+});
+
+const backspaceButton = document.querySelector('.backspace-but');
+backspaceButton.addEventListener('click', () => {
+    displayValue = displayValue.slice(0, -1);
+    display.textContent = displayValue;
 });
 
 for (let i = 0; i < operatorButton.length; i++) {
@@ -64,7 +71,8 @@ for (let i = 0; i < operatorButton.length; i++) {
 
 resultButton.addEventListener('click', () => {
     if (operator === '/' && num2 === '0'){
-        display.textContent = 'Que hiciste?';
+        display.textContent = '!!!';
+        document.body.style.backgroundColor = "red";
     } else if (num1 !== '' && num2 !== '') {
         result = operate(num1, num2, operator);
         display.textContent = Math.round(result * 1000000) / 1000000;
@@ -81,6 +89,8 @@ clearBut.addEventListener('click', () => {
     displayValue = '';
     result = '';
     display.textContent = displayValue;
+    document.body.style.backgroundColor = "";
+
 });
 
 function operate (num1, num2, operator) {
